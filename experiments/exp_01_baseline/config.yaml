@@ -1,0 +1,33 @@
+# experiments/exp01_baseline/config.yaml
+# This file defines the configuration for your training experiments.
+# It will be automatically generated with default values if it doesn't exist
+# when you run `python src/training/train.py`.
+
+data:
+  db_path: /mnt/f/Vojta/School/MSC_Thesis/cognet_transfigure/cognates_3.db # Path to the SQLite database
+  data_base_dir: /mnt/f/Vojta/School/MSC_Thesis/cognet_transfigure # Base directory where 'mel_spectrograms' are stored
+  max_frames: 50 # Maximum sequence length for spectrograms (for padding/truncation)
+
+model:
+  n_mels: 80 # Number of mel bins in the input spectrograms
+  d_model: 240 # Dimension of the features in the Transformer encoder
+  nhead: 8 # Number of attention heads in the Transformer
+  num_encoder_layers: 4 # Number of Transformer encoder layers
+  dim_feedforward: 1024 # Dimension of the feedforward network in Transformer layers
+  dropout: 0.1 # Dropout rate for Transformer layers and positional encoding
+  embedding_dim: 128 # Dimension of the final output embedding from the Siamese network
+
+training:
+  epochs: 50 # Number of training epochs
+  batch_size: 128 # Batch size for DataLoader
+  max_length: 15000
+  learning_rate: 0.00001 # Initial learning rate for the optimizer
+  log_interval: 10 # Frequency (in batches) to log training loss
+  checkpoint_dir: experiments/exp_01_baseline/checkpoints # Directory to save model checkpoints
+  resume_checkpoint: False # Set to True to resume training from a saved checkpoint
+  resume_checkpoint_name: '' # Specify the exact checkpoint file name (e.g., 'model_best_epoch_X_YYYYMMDD_HHMMSS.pt')
+                           # Leave empty if resume_checkpoint is False.
+  num_workers: 4 # Number of data loading workers (set to 0 for debugging on Windows)
+
+loss:
+  margin: 1.0 # Margin value for the TripletLoss function
